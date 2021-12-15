@@ -1,31 +1,49 @@
-import com.codeborne.selenide.SelenideElement;
+
 import net.jodah.failsafe.internal.util.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.devtools.v85.page.Page;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static com.codeborne.selenide.Condition.enabled;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
+import java.util.concurrent.TimeUnit;
 
 
 public class CatalogPage {
+    private final WebDriver driver;
 
+    public CatalogPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
 
-    @FindBy(how = How.XPATH, using = "//div[@data-card-index='0']/div/div//a")
-    SelenideElement elementAddBask;
-
-    @FindBy(how = How.XPATH, using = "//a[contains(.,'Корзина')]")
-    SelenideElement elementOpenBask;
-
-
-    @FindBy(how = How.XPATH, using = "//div[@data-card-index='0']/div/a")
-    SelenideElement elementProductHover;
-
-
+    //
+//    @FindBy(how = How.XPATH, using = "//div[@data-card-index='0']/div/div//a")
+//    SelenideElement elementAddBask;
+//
+//    @FindBy(how = How.XPATH, using = "//a[contains(.,'Корзина')]")
+//    SelenideElement elementOpenBask;
+//
+//
+//    @FindBy(how = How.XPATH, using = "//div[@data-card-index='0']/div/a")
+//    SelenideElement elementProductHover;
+//
+//
     public CatalogPage selectCategory(String s) {
         String id = saveID();
-        $(By.xpath("//label[contains(text(),'" + s + "')]")).shouldBe(visible, enabled).click();
+
+        WebElement webElement = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(text(),'" + s + "')]")));
+        webElement.click();
+
+//        $(By.xpath("//label[contains(text(),'" + s + "')]")).shouldBe(visible, enabled).click();
         compareID(id);
 
 
@@ -34,7 +52,11 @@ public class CatalogPage {
 
     public CatalogPage sortSelection(String s) {
         String id = saveID();
-        $(By.xpath("//a[@class='sort-item' and contains(. ,'" + s + "')]")).shouldBe(visible, enabled).click();
+        WebElement webElement = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='sort-item' and contains(. ,'" + s + "')]")));
+        webElement.click();
+
+//        $(By.xpath("//a[@class='sort-item' and contains(. ,'" + s + "')]")).shouldBe(visible, enabled).click();
 
         compareID(id);
 
@@ -43,31 +65,59 @@ public class CatalogPage {
 
 
     public CatalogPage addBasket() {
-        elementProductHover.shouldBe(visible, enabled).hover();
-        elementAddBask.shouldBe(visible, enabled).click();
+
+        Actions builder = new Actions(driver);
+        WebElement webElement = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-card-index='0']/div/a")));
+        builder.moveToElement(webElement).build().perform();
+
+        WebElement webElement1 = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-card-index='0']/div/div//a")));
+        webElement1.click();
+
+
+//        elementProductHover.shouldBe(visible, enabled).hover();
+//        elementAddBask.shouldBe(visible, enabled).click();
 
         return this;
     }
 
     public String saveProductID() {
-        elementProductHover.shouldBe(visible, enabled);
-        String href = elementProductHover.getAttribute("href");
+        WebElement webElement = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-card-index='0']/div/a")));
+
+//        elementProductHover.shouldBe(visible, enabled);
+        String href = webElement.getAttribute("href");
         String[] artcl = href.split("/");
         return artcl[4];
     }
 
     public CatalogPage openBasket() {
-        elementOpenBask.shouldBe(visible, enabled).click();
+        WebElement webElement = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(.,'Корзина')]")));
+        webElement.click();
+
+//        elementOpenBask.shouldBe(visible, enabled).click();
         return this;
     }
 
+    @FindBy(how = How.XPATH, using = "//div[@data-card-index='0']")
+    WebElement webElementSaveID;
 
     public String saveID() {
+        try{
+            WebElement webElement = (new WebDriverWait(driver, 10))
+                    .until(ExpectedConditions.visibilityOf(webElementSaveID));
 
-        return $(By.xpath("//div[@data-card-index='0']")).getAttribute("data-popup-nm-id");
+//        $(By.xpath("//div[@data-card-index='0']")).getAttribute("data-popup-nm-id");
 
+            return webElement.getAttribute("data-popup-nm-id");
+        } catch (StaleElementReferenceException e) {
+            return saveID();
+        }
     }
 
+    //
     public void compareID(String id) {
 
         int count = 0;
