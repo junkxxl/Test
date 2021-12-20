@@ -1,22 +1,14 @@
-import org.checkerframework.checker.units.qual.C;
-import org.junit.jupiter.api.AfterEach;
+package wildberries;
+
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
-
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class TestWildberriesElectronics extends StartQuit{
+public class TestWildberriesElectronics extends StartQuit {
 
 
     @ParameterizedTest
@@ -69,17 +61,14 @@ public class TestWildberriesElectronics extends StartQuit{
     static List<String[]> dataProvider() {
         String[] s = new String[]{"Электроника", "Смартфоны и телефоны", "Детская электроника", "3D-ручка", "рейтингу",
                 "Зоотовары", "Для кошек", "цене",};
-//        String[] s2 = new String[]{"Электроника","Смартфоны и телефоны","Планшеты","Apple","скидке",
-//                "Зоотовары","Для собак","рейтингу",};
 
         List<String[]> listS = new ArrayList<>();
         listS.add(s);
-//        listS.add(s2);
+
 
         return listS;
 
     }
-
 
 
 }

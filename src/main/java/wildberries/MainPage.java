@@ -1,3 +1,5 @@
+package wildberries;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -42,7 +44,7 @@ public class MainPage {
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".nav-element__burger")));
         webElement.click();
 
-//        сatalogButtonElement.shouldBe(visible, enabled).click();
+
         return this;
     }
 

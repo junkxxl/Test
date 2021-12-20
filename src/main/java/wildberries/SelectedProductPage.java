@@ -1,3 +1,4 @@
+package wildberries;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -39,8 +40,6 @@ public class SelectedProductPage {
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='btn-main' and contains(@data-link, 'addToBasket ')]")));
         webElement.click();
 
-
-//        elementAddBasket.shouldBe(visible).click();
         return this;
     }
 
