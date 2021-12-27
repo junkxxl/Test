@@ -13,11 +13,11 @@ public class TestWildberriesElectronics extends StartQuit {
 
     @ParameterizedTest
     @MethodSource("dataProvider")
-    void Test2(String mainPagecatalog, String mainPagecategory, String categoryPagecategory, String catalogPageCategory
+    void test2(String mainPagecatalog, String mainPagecategory, String categoryPagecategory, String catalogPageCategory
             , String CatalogPageSort, String mainPagecatalog2, String mainPagecategorySelect, String CatalogPageSort2) throws MalformedURLException, InterruptedException {
 
 
-        MainPage mainPage = MainPage.open("http://www.wildberries.ru/", driver);
+        MainPage mainPage = MainPage.open(config.getProperty("url"), driver);
 
 
         mainPage.openCatalogsButton().catalogSelection(mainPagecatalog)//"Электроника"

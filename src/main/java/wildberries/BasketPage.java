@@ -6,16 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.List;
 
 
-public class BasketPage {
-    private final WebDriver driver;
-    private By goodItem = By.cssSelector(".good-info a");
+public class BasketPage extends BasePageWeb<WebDriver> {
+    private final By goodItem = By.cssSelector(".good-info a");
 
     public BasketPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
 
@@ -53,6 +51,4 @@ public class BasketPage {
 
         return artcl[4];
     }
-
-
 }

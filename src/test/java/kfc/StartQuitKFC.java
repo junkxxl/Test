@@ -5,25 +5,33 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 abstract class StartQuitKFC {
     protected AndroidDriver driver;
+    static Properties config;
+
+    @BeforeAll
+   static void loadConfig() throws IOException {
+        config = new Properties();
+        config.load(StartQuitKFC.class.getClassLoader().getResourceAsStream("config.properties"));
+
+    }
 
     @BeforeEach
     void start() throws IOException {
-        File app = new File("ru.kfc.kfc_delivery_7.3.0_15944.apk");
         DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("appium:app", config.getProperty("appKfc"));
+        driver = new AndroidDriver<>(new URL(config.getProperty("urlAppium")), capabilities);
 
-        capabilities.setCapability("app", app.getAbsolutePath());
-        driver = new AndroidDriver<>(new URL("http://localhost:4723/wd/hub"), capabilities);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 

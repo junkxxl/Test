@@ -9,16 +9,16 @@ import java.net.MalformedURLException;
 public class TestWildberries extends StartQuit{
 
     @Test
-    void Test1() throws MalformedURLException {
+    void test1() throws MalformedURLException {
 
-        MainPage mainPage = MainPage.open("http://www.wildberries.ru/", driver);
+        MainPage mainPage = MainPage.open(config.getProperty("url"), driver);
 
         mainPage.search("белые тапочки");
 
 
         PageProducts product = new PageProducts(driver);
         String id1=product.saveID(1);
-        product.clickToProduct();
+        product.clickToProduct(id1);
 
         SelectedProductPage selectedProduct= new SelectedProductPage(driver);
         selectedProduct.clickProductSize();

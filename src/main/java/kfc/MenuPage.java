@@ -3,17 +3,16 @@ package kfc;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import java.time.Duration;
 
 
-public class MenuPage {
-    private final MobileDriver<MobileElement> driver;
+public class MenuPage extends BasePageAndroid<MobileDriver<MobileElement>> {
+
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Добавить в корзину']")
     private MobileElement mobileElementAddBasket;
@@ -22,9 +21,8 @@ public class MenuPage {
     private MobileElement mobileElementOpenBasket;
 
 
-    public MenuPage(MobileDriver<MobileElement> driver) {
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    public MenuPage(AndroidDriver driver) {
+        super(driver);
     }
 
 

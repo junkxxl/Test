@@ -10,11 +10,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class MainPage {
-    private final WebDriver driver;
+public class MainPage extends BasePageWeb<WebDriver> {
+
 
     public MainPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
 
     }
 
@@ -23,6 +23,7 @@ public class MainPage {
         driver.get(s);
         MainPage page = new MainPage(driver);
         PageFactory.initElements(driver, page);
+
         return page;
     }
 
@@ -48,9 +49,6 @@ public class MainPage {
         return this;
     }
 
-
-
-
     public MainPage catalogSelection(String s) throws InterruptedException {
         Actions builder = new Actions(driver);
 
@@ -58,8 +56,6 @@ public class MainPage {
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@class='menu-burger__main-list']//a[text()='" + s + "']")));
         builder.moveToElement(webElement).build().perform();
 
-
-//        $(By.xpath("//ul[@class='menu-burger__main-list']//a[text()='" + s + "']")).shouldBe(visible, enabled).hover();
         return this;
     }
 
@@ -77,7 +73,7 @@ public class MainPage {
         WebElement webElement = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='" + categories + "']")));
         webElement.click();
-//        $(By.xpath("//a[text()='" + categories + "']")).shouldBe(visible, enabled).click();
+
         return this;
     }
 }

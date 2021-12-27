@@ -8,19 +8,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class CatalogPage {
-    private final WebDriver driver;
+
+public class CatalogPage extends BasePageWeb<WebDriver> {
+
 
     @FindBy(how = How.XPATH, using = "//div[@data-card-index='0']")
     WebElement webElementSaveID;
 
     public CatalogPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public CatalogPage selectCategory(String s) {
@@ -101,4 +100,5 @@ public class CatalogPage {
                 Assertions.assertEquals(id, saveID(), "Error");
         }
     }
+
 }
