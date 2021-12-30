@@ -29,7 +29,7 @@ abstract class StartQuitKFC {
     @BeforeEach
     void start() throws IOException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("appium:app", config.getProperty("appKfc"));
+        capabilities.setCapability("app", config.getProperty("appKfc"));
         capabilities.setCapability("deviceName","Pixel");
         driver = new AndroidDriver<>(new URL(config.getProperty("urlAppium")), capabilities);
 
