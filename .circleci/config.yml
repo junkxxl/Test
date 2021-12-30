@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       - image: cimg/openjdk:8.0.312
-      - image: appium/appium-emulator:1.1-arsenal
+      - image: amrka/ultimate-android:latest
       - image: selenium/standalone-chrome:4.1.1-20211217
 
     steps:
