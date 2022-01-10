@@ -25,14 +25,17 @@ abstract class StartQuit {
     @BeforeEach
     void start() throws IOException {
 
+         String username = System.getenv("BROWSERSTACK_USERNAME");
+        String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
+        String browserstackLocal = System.getenv("BROWSERSTACK_LOCAL");
+        String browserstackLocalIdentifier = System.getenv("BROWSERSTACK_LOCAL_IDENTIFIER");
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        capabilities.merge(options);
-
-        driver = new RemoteWebDriver(new URL(config.getProperty("webdriver.url")), capabilities);
-
+        capabilities.setCapability("os", "Windows");
+        capabilities.setCapability("browser", "chrome");
+        capabilities.setCapability("browserstack.local", browserstackLocal);
+        capabilities.setCapability("browserstack.localIdentifier", browserstackLocalIdentifier);
+        driver = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey + "@hub.browserstack.com/wd/hub"), capabilities);
 
     }
 
