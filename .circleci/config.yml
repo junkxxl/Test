@@ -7,8 +7,8 @@ jobs:
   build:
     docker:
       - image: cimg/openjdk:8.0.312
-      - image: circleci/android:api-26-node
-      - image: appium/appium-emulator:1.1-arsenal
+      - image: appium/appium:v1.22.0-p0
+      - image: budtmo/docker-android-genymotion
       - image: selenium/standalone-chrome:4.1.1-20211217
 
     steps:
