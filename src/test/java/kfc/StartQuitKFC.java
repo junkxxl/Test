@@ -29,8 +29,16 @@ abstract class StartQuitKFC {
     @BeforeEach
     void start() throws IOException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("appium:app", config.getProperty("appKfc"));
-        driver = new AndroidDriver<>(new URL(config.getProperty("urlAppium")), capabilities);
+
+        capabilities.setCapability("browserstack.user", System.getenv("BROWSERSTACK_USERNAME"));
+        capabilities.setCapability("browserstack.key", System.getenv("BROWSERSTACK_ACCESS_KEY"));
+        capabilities.setCapability("app", "bs://51c3c6ff24ff8a37e592bdf33577664d5fee83c4");
+        capabilities.setCapability("device", "Samsung Galaxy S10 Plus");
+        capabilities.setCapability("os_version", "9.0");
+//        capabilities.setCapability("language", "ru");
+//        capabilities.setCapability("locale", "ru_RU");
+
+        driver = new AndroidDriver<>(new URL("http://hub.browserstack.com/wd/hub"), capabilities);
 
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
