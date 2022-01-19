@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.stream.Stream;
 
 
-public class TestWildberriesElectronics extends StartQuit {
+public class AddElectronicsToBasketTest extends StartQuit {
 
 
     static Stream<Arguments> dataProvider() throws MalformedURLException {
@@ -50,43 +50,46 @@ public class TestWildberriesElectronics extends StartQuit {
 
     @ParameterizedTest
     @MethodSource("dataProvider")
-    void test2(String mainPageCatalog, String mainPageCategory, String categoryPageCategory, String catalogPageCategory
-            , String CatalogPageSort, String mainPageCatalog2, String mainPageCategorySelect, String CatalogPageSort2, WebDriver webDriver) throws MalformedURLException, InterruptedException {
+    void testAddToBasket(String mainPageCatalog, String mainPageCategory,
+                         String categoryPageCategory, String catalogPageCategory,
+                         String CatalogPageSort, String mainPageCatalog2,
+                         String mainPageCategorySelect, String CatalogPageSort2,
+                         WebDriver webDriver) throws MalformedURLException, InterruptedException {
 
 
         MainPage mainPage = MainPage.open(config.getProperty("url"), webDriver);
 
 
-        mainPage.openCatalogsButton().catalogSelection(mainPageCatalog)//"Электроника"
-                .openAllCategories(mainPageCategory, "Все категории");//"Смартфоны и телефоны"
+        mainPage.openCatalogsButton().catalogSelection(mainPageCatalog)
+                .openAllCategories(mainPageCategory, "Все категории");
 
-        СategoryPage сategoryPage = new СategoryPage(webDriver);
-        сategoryPage.selection(categoryPageCategory);//"Детская электроника"
+        СategoriesPage сategoriesPage = new СategoriesPage(webDriver);
+        сategoriesPage.selection(categoryPageCategory);
 
 
         CatalogPage catalogPage = new CatalogPage(webDriver);
-        catalogPage.selectCategory(catalogPageCategory)//"3D-ручка"
+        catalogPage.selectCategory(catalogPageCategory)
 
-                .sortSelection(CatalogPageSort);//"Рейтингу"
+                .sortSelection(CatalogPageSort);
 
-        String id1 = catalogPage.saveProductID();
-        catalogPage.addBasket();
+        String id1 = catalogPage.saveProductId();
+        catalogPage.addToBasket();
 
         BasketPage basketPage = new BasketPage(webDriver);
 
 
         mainPage.openCatalogsButton()
-                .catalogSelection(mainPageCatalog2)//"Зоотовары"
-                .categorySelection(mainPageCategorySelect);//"Для кошек"
+                .catalogSelection(mainPageCatalog2)
+                .categorySelection(mainPageCategorySelect);
 
 
-        catalogPage.sortSelection(CatalogPageSort2)//"цене"
-                .addBasket();
-        String id3 = catalogPage.saveProductID();
+        catalogPage.sortSelection(CatalogPageSort2)
+                .addToBasket();
+        String id3 = catalogPage.saveProductId();
         catalogPage.openBasket();
 
-        String id2 = basketPage.saveArrayIDBasket(1);
-        String id4 = basketPage.saveArrayIDBasket(0);
+        String id2 = basketPage.saveArrayId(1);
+        String id4 = basketPage.saveArrayId(0);
 
 
         Assertions.assertEquals(id1, id2);

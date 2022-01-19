@@ -15,14 +15,14 @@ import java.time.Duration;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-abstract class StartQuitKFC {
-    protected AndroidDriver driver;
+abstract class StartQuit {
     static Properties config;
+    protected AndroidDriver driver;
 
     @BeforeAll
-   static void loadConfig() throws IOException {
+    static void loadConfig() throws IOException {
         config = new Properties();
-        config.load(StartQuitKFC.class.getClassLoader().getResourceAsStream("config.properties"));
+        config.load(StartQuit.class.getClassLoader().getResourceAsStream("config.properties"));
 
     }
 
@@ -70,7 +70,7 @@ abstract class StartQuitKFC {
 
         switch (dir) {
             case DOWN:
-                pointOptionStart  = up;
+                pointOptionStart = up;
                 pointOptionEnd = down;
                 break;
             case UP:

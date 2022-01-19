@@ -37,8 +37,6 @@ public class MainPage extends BasePageWeb<WebDriver> {
     }
 
 
-
-
     public MainPage openCatalogsButton() {
 
         WebElement webElement = (new WebDriverWait(driver, 10))

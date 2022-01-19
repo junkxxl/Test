@@ -7,13 +7,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class SelectedProductPage extends BasePageWeb<WebDriver> {
+public class ProductSelectionPage extends BasePageWeb<WebDriver> {
 
-    public SelectedProductPage(WebDriver driver) {
+    public ProductSelectionPage(WebDriver driver) {
         super(driver);
     }
 
-    public SelectedProductPage clickProductSize() {
+    public ProductSelectionPage selectProductSize() {
         WebElement webElement = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".j-size:not(.disabled)")));
         webElement.click();
@@ -21,7 +21,7 @@ public class SelectedProductPage extends BasePageWeb<WebDriver> {
         return this;
     }
 
-    public SelectedProductPage clickAddBasket() {
+    public ProductSelectionPage clickAddBasket() {
         WebElement webElement = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='btn-main' and contains(@data-link, 'addToBasket ')]")));
         webElement.click();
@@ -29,7 +29,7 @@ public class SelectedProductPage extends BasePageWeb<WebDriver> {
         return this;
     }
 
-    public SelectedProductPage clickGoToBasket() {
+    public ProductSelectionPage clickGoToBasket() {
 
         WebElement webElement = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Перейти в корзину")));

@@ -13,7 +13,6 @@ abstract class StartQuit {
     public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
 
     static Properties config;
-    protected WebDriver driver;
 
     @BeforeAll
     static void loadConfig() throws IOException {

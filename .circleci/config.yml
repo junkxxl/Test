@@ -1,18 +1,14 @@
 # Java Gradle CircleCI 2.0 configuration file
 # See: https://circleci.com/docs/2.0/language-java/
 version: 2.1
-machine:
-  environment:
-    BROWSERSTACK_USERNAME: "alex_HpbOvc"
-    BROWSERSTACK_ACCESS_KEY: "XkXH5ppztTXWrKyvJzhm"
-    BROWSERSTACK_LOCAL: true
-test:
-  pre:
-    # Download the browserstack binary file
-    - wget "https://www.browserstack.com/browserstack-local/BrowserStackLocal-linux-x64.zip"
-    # Unzip the BrowserStack Local binary file
-    - unzip BrowserStackLocal-linux-x64.zip
-    # Run the file with your access key
-    - ./BrowserStackLocal $BROWSERSTACK_ACCESS_KEY:
-        background: true
+orbs:
+  browser-tools: circleci/browser-tools@1.1
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:8.0.312
 
+    steps:
+      - checkout:
+          name: checkout code
+      - run: gradle test

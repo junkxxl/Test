@@ -57,7 +57,7 @@ public class MenuPage extends BasePageAndroid<MobileDriver<MobileElement>> {
         return this;
     }
 
-    public String saveProductNameBasket(String nameProduct) {
+    public String saveNameProductFromBasket(String nameProduct) {
         MobileElement mobileElementSaveProductIDBasket = driver.findElement(By.xpath("//android.widget.TextView[@text='" + nameProduct + "' and @index='0']"));
 
         return mobileElementSaveProductIDBasket.getText();

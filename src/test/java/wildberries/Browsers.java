@@ -1,6 +1,5 @@
 package wildberries;
 
-import java.util.List;
 
 public class Browsers {
     String os;

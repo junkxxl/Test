@@ -3,7 +3,7 @@ package kfc;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class TestKfc extends StartQuitKFC {
+public class AddToBasketTest extends StartQuit {
 
     @Test
     void testAddToBasket() {
@@ -18,7 +18,7 @@ public class TestKfc extends StartQuitKFC {
         swipeScreen(Direction.LEFT);
         swipeScreen(Direction.LEFT);
 
-        publicityPage.clickOpenMenuWait();
+        publicityPage.elementOpenMenuWait();
         publicityPage.clickOpenMenu();
 
         MapPage mapPage = new MapPage(driver);
@@ -34,9 +34,9 @@ public class TestKfc extends StartQuitKFC {
 
         menuPage.addBasket();
         menuPage.openBasket();
-        String nameProductBasket = menuPage.saveProductNameBasket(nameProduct);
+        String nameProductInBasket = menuPage.saveNameProductFromBasket(nameProduct);
 
-        Assertions.assertEquals(nameProduct,nameProductBasket);
+        Assertions.assertEquals(nameProduct,nameProductInBasket);
 
 
 

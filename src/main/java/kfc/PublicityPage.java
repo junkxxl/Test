@@ -14,7 +14,6 @@ public class PublicityPage extends BasePageAndroid<MobileDriver<MobileElement>> 
     @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'ЛОВИ')]")
     private MobileElement mobileElementSwipe;
 
-    //android.widget.TextView[@text='Перейти в меню']
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Перейти в меню']")
     private MobileElement mobileElementOpenMenu;
 
@@ -39,7 +38,7 @@ public class PublicityPage extends BasePageAndroid<MobileDriver<MobileElement>> 
         return this;
     }
 
-    public PublicityPage clickOpenMenuWait() {
+    public PublicityPage elementOpenMenuWait() {
         new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(40))
                 .pollingEvery(Duration.ofSeconds(1))

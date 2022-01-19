@@ -7,13 +7,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class СategoryPage extends BasePageWeb<WebDriver> {
+public class СategoriesPage extends BasePageWeb<WebDriver> {
 
-    public СategoryPage(WebDriver driver) {
+    public СategoriesPage(WebDriver driver) {
         super(driver);
     }
 
-    public СategoryPage selection(String s) {
+    public СategoriesPage selection(String s) {
 
         WebElement webElement = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div/img[@alt='" + s + "']")));

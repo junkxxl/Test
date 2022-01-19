@@ -16,37 +16,37 @@ public class CatalogPage extends BasePageWeb<WebDriver> {
 
 
     @FindBy(how = How.XPATH, using = "//div[@data-card-index='0']")
-    WebElement webElementSaveID;
+    WebElement webElementSaveId;
 
     public CatalogPage(WebDriver driver) {
         super(driver);
     }
 
     public CatalogPage selectCategory(String s) {
-        String id = saveID();
+        String id = saveId();
 
         WebElement webElement = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(text(),'" + s + "')]")));
         webElement.click();
 
-        compareID(id);
+        compareId(id);
 
         return this;
     }
 
     public CatalogPage sortSelection(String s) {
-        String id = saveID();
+        String id = saveId();
         WebElement webElement = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='sort-item' and contains(. ,'" + s + "')]")));
         webElement.click();
 
-        compareID(id);
+        compareId(id);
 
         return this;
     }
 
 
-    public CatalogPage addBasket() {
+    public CatalogPage addToBasket() {
 
         Actions builder = new Actions(driver);
         WebElement webElement = (new WebDriverWait(driver, 10))
@@ -61,7 +61,7 @@ public class CatalogPage extends BasePageWeb<WebDriver> {
         return this;
     }
 
-    public String saveProductID() {
+    public String saveProductId() {
         WebElement webElement = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-card-index='0']/div/a")));
 
@@ -79,26 +79,25 @@ public class CatalogPage extends BasePageWeb<WebDriver> {
         return this;
     }
 
-    public String saveID() {
+    public String saveId() {
         try{
             WebElement webElement = (new WebDriverWait(driver, 10))
-                    .until(ExpectedConditions.visibilityOf(webElementSaveID));
+                    .until(ExpectedConditions.visibilityOf(webElementSaveId));
 
             return webElement.getAttribute("data-popup-nm-id");
         } catch (StaleElementReferenceException e) {
-            return saveID();
+            return saveId();
         }
     }
 
 
-    public void compareID(String id) {
+    public void compareId(String id) {
 
         int count = 0;
-        while (id.equals(saveID()) && count < 20) {
+        while (id.equals(saveId()) && count < 20) {
             count++;
             if (count == 19)
-                Assertions.assertEquals(id, saveID(), "Error");
+                Assertions.assertEquals(id, saveId(), "Error");
         }
     }
-
 }

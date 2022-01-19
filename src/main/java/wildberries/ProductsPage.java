@@ -10,16 +10,16 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public class PageProducts extends BasePageWeb<WebDriver> {
+public class ProductsPage extends BasePageWeb<WebDriver> {
 
     private final By productCard = By.cssSelector(".product-card");
 
-    public PageProducts(WebDriver driver) {
+    public ProductsPage(WebDriver driver) {
         super(driver);
     }
 
 
-    String saveID(int i) {
+    String saveid(int i) {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         List<WebElement> webElementList = driver.findElements(productCard);
 
@@ -28,7 +28,7 @@ public class PageProducts extends BasePageWeb<WebDriver> {
         return webElement.getAttribute("data-popup-nm-id");
     }
 
-    public PageProducts clickToProduct(String product) {
+    public ProductsPage clickToProduct(String product) {
 
         WebElement webElement = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-popup-nm-id='" + product + "']")));

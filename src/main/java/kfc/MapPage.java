@@ -15,7 +15,7 @@ public class MapPage extends BasePageAndroid<MobileDriver<MobileElement>> {
 
 
     @AndroidFindBy(xpath = "//android.widget.EditText[@text='Введите название города']")
-    MobileElement mobileElementNameCountry;
+    MobileElement mobileElement_EnterNameCity;
 
     public MapPage(AndroidDriver driver) {
         super(driver);
@@ -34,9 +34,8 @@ public class MapPage extends BasePageAndroid<MobileDriver<MobileElement>> {
         new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofSeconds(1))
-                .until(ExpectedConditions.visibilityOf(mobileElementNameCountry));
+                .until(ExpectedConditions.visibilityOf(mobileElement_EnterNameCity));
 
         return this;
     }
-
 }

@@ -15,7 +15,7 @@ import java.net.URLConnection;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-public class TestWildberries extends StartQuit {
+public class AddToBasketTest extends StartQuit {
 
 
     static Stream<WebDriver> driverProvider() throws IOException {
@@ -43,24 +43,24 @@ public class TestWildberries extends StartQuit {
 
     @ParameterizedTest
     @MethodSource("driverProvider")
-    void test1(WebDriver webDriver)  {
+    void testAddToBasket(WebDriver webDriver)  {
 
         MainPage mainPage = MainPage.open(config.getProperty("url"), webDriver);
 
         mainPage.search("белые тапочки");
 
-        PageProducts product = new PageProducts(webDriver);
-        String id1 = product.saveID(1);
-        product.clickToProduct(id1);
+        ProductsPage productsPage = new ProductsPage(webDriver);
+        String id1 = productsPage.saveid(1);
+        productsPage.clickToProduct(id1);
 
-        SelectedProductPage selectedProduct = new SelectedProductPage(webDriver);
-        selectedProduct.clickProductSize();
-        selectedProduct.clickAddBasket();
-        selectedProduct.clickGoToBasket();
+        ProductSelectionPage productSelectionPage = new ProductSelectionPage(webDriver);
+        productSelectionPage.selectProductSize();
+        productSelectionPage.clickAddBasket();
+        productSelectionPage.clickGoToBasket();
 
         BasketPage basketPage = new BasketPage(webDriver);
 
-        String id2 = basketPage.saveProductIDBasket();
+        String id2 = basketPage.saveProductId();
 
         Assertions.assertEquals(id1, id2);
 

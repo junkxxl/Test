@@ -17,7 +17,7 @@ public class BasketPage extends BasePageWeb<WebDriver> {
     }
 
 
-    public String saveProductIDBasket() {
+    public String saveProductId() {
 
         WebElement webElement = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.visibilityOfElementLocated(goodItem));
@@ -29,7 +29,7 @@ public class BasketPage extends BasePageWeb<WebDriver> {
         return artcl[4];
     }
 
-    String saveArrayIDBasket(int i) {
+    String saveArrayId(int i) {
 
 
         List<WebElement> webElementList = (new WebDriverWait(driver, 10))
@@ -47,8 +47,8 @@ public class BasketPage extends BasePageWeb<WebDriver> {
         WebElement webElement1 = webElementList.get(i);
 
         String href = webElement1.getAttribute("href");
-        String[] artcl = href.split("/");
+        String[] id = href.split("/");
 
-        return artcl[4];
+        return id[4];
     }
 }
