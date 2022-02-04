@@ -66,6 +66,8 @@
     * Запустить Chrome Driver
     * Запустить тест
       src/test/resources/afishaTest.feature
+    * Запустить тест
+      me.junkxxl.afishaTest#test
 ````
 #### Описание теста
 Тест заключается в выборе выставки по рекомендации афиши

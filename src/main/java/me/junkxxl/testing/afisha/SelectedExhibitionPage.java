@@ -23,7 +23,7 @@ public class SelectedExhibitionPage extends BasePageWeb<WebDriver> {
     public SelectedExhibitionPage compareLocation(String s) {
 
         WebElement webElement = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[text()='Манеж']")));
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[text()='" + s + "']")));
 
         String location = webElement.getText();
         Assertions.assertEquals(s, location);
